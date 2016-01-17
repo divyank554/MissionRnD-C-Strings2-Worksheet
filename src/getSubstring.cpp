@@ -23,12 +23,25 @@ char * get_sub_string(char *str, int i, int j)
 		return NULL;
 	if (i > j)
 		return NULL;
+	if (i < 0 && j < 0)
+		return NULL;
 
+	int len = 0;
+	while (str[len] != '\0')
+		len++;
+	if (i < 0)
+		i = 0;
+
+	if (j > len)
+		j = len-1;
+
+	int temp = j - i + 1;
 	char *strnew;
-	strnew = (char*)malloc(sizeof(char));
+	strnew = (char*)malloc(temp * sizeof(char));
 	int itr1, itr2;
 	for (itr1 = i,itr2 = 0; itr1 <= j; itr1++,itr2++)
 		strnew[itr2] = str[itr1];
 
+	strnew[itr2] = '\0';
     return strnew;
 }
